@@ -1,0 +1,29 @@
+name: My Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag SammadDevops:$(date +%s)
+
+    - name: Release/OS of the GitHub Action Runner
+      run: | 
+        uname -a 
+        cat /etc/issue
+        touch abc.txt
+    - name: Docker image
+      run: |
+       docker images
+       docker ps -a 
